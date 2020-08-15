@@ -1,9 +1,20 @@
-import { createApp } from "vue";
+import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .mount("#app");
+import ElementUI from 'element-ui' // 追記
+import locale from 'element-ui/lib/locale/lang/ja' // 追記
+import 'element-ui/lib/theme-chalk/index.css' // 追記
+
+console.log(ElementUI)
+console.log(locale)
+
+Vue.config.productionTip = false;
+Vue.use(ElementUI, {locale}) // 追記
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount("#app");
