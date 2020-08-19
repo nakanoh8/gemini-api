@@ -2,9 +2,32 @@
     <el-row>
         <el-col :span="24">
             <el-card class="box-card">
+                <el-col :span="8">
+                    <el-input
+                            v-model="request.name"
+                            placeholder="New Name..."
+                            clearable>
+                    </el-input>
+                </el-col>
+                <el-col :span="8">
+                    <el-input
+                            v-model="request.symbol"
+                            placeholder="New Symbol..."
+                            clearable>
+                    </el-input>
+                </el-col>
+                <el-col :span="8">
+                    <el-button
+                            type="success"
+                            @click="addCurrency">追加</el-button>
+                </el-col>
+            </el-card>
+        </el-col>
+        <el-col :span="24">
+            <el-card class="box-card">
                 <div slot="header" class="clearfix">
                     <span>仮想通貨一覧</span>
-                    <p>{{currencies[0]}}</p>
+                    <p>{{currencies}}</p>
                 </div>
                 <el-table
                         :data="currencies"
@@ -40,6 +63,10 @@
     name: "Currency",
     data () {
       return {
+        request: {
+          name: undefined,
+          symbol: undefined
+        },
         currencies: []
       }
     },
@@ -51,7 +78,11 @@
         const res = await axios.get('http://localhost:8080/')
         this.currencies = res.data.currencies
         console.info(this.currencies)
-      }
+      },
+      addCurrency: async function () {
+        await axios.post('http://localhost:8080/', this.request)
+        await this.refresh()
+      },
     }
   }
 </script>
