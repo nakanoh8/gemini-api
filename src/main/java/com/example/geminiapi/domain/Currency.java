@@ -28,4 +28,12 @@ public class Currency {
 
     /** 数量 */
     private BigDecimal amount;
+
+    public static Currency newCurrency(String name, String symbol) {
+        Currency currency = new Currency();
+        currency.name = name;
+        currency.symbol = symbol;
+        currency.amount = BigDecimal.ZERO;
+        return currency;
+    }
 }

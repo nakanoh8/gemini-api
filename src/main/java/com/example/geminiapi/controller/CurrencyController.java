@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.geminiapi.domain.Currency;
 import com.example.geminiapi.service.CurrencyService;
@@ -23,5 +25,11 @@ public class CurrencyController {
                 .currencies(currencies)
                 .build();
         return new ResponseEntity<>(currencyResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<HttpStatus> save(@RequestBody CurrencyAddRequest request) {
+        currencyService.save(request.getName(), request.getSymbol());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
