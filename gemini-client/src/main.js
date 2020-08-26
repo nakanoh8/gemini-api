@@ -7,11 +7,14 @@ import ElementUI from 'element-ui' // 追記
 import locale from 'element-ui/lib/locale/lang/ja' // 追記
 import 'element-ui/lib/theme-chalk/index.css' // 追記
 
-// console.log(ElementUI)
-// console.log(locale)
+import firebase from 'firebase' // 追記
+
+import config from './firebaseConfig'
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale}) // 追記
+
+firebase.initializeApp(config);
 
 new Vue({
   router,
