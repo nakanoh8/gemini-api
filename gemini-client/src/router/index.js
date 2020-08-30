@@ -27,6 +27,7 @@ const routes = [
         name: 'currency',
         component: () =>
             import(/* webpackChunkName: "currency" */ '../views/Currency.vue'),
+        meta: { requiresAuth: true }
     },
     {
         path: '/signup',
